@@ -75,7 +75,8 @@ System.out.println("------------------\n");
             System.out.println("Invalid suit entered.");
             return;
         }
-
+// Hard-coded lucky card
+Card luckyCard = new Card(Card.Rank.ACE, Card.Suit.SPADES);
         // Search for the user's card
         boolean found = false;
 
