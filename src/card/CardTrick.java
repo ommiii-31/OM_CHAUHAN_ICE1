@@ -76,7 +76,7 @@ System.out.println("------------------\n");
             return;
         }
 // Hard-coded lucky card
-Card luckyCard = new Card(Card.Rank.ACE, Card.Suit.SPADES);
+Card luckyCard = new Card(Card.Rank.ONE, Card.Suit.SPADES);
         // Search for the user's card
         boolean found = false;
 
