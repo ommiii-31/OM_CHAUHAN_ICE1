@@ -1,32 +1,94 @@
+package Card;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package card;
+import java.util.Scanner;
+import java.util.Random;
 
 /**
- * A class that fills a magic hand of 7 cards with random Card Objects
- * and then asks the user to pick a card and searches the array of cards
- * for the match to the user's card. To be used as starting code in ICE 1
- * @author srinivsi
+ * Modifier: Om Chauhan
+ * Student Number: 991835995
  */
+
 public class CardTrick {
-    
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
+
+        Random rand = new Random();
+        Scanner sc = new Scanner(System.in);
+
+        // Create an array of 7 random cards
         Card[] magicHand = new Card[7];
-        
-        for (int i=0; i<magicHand.length; i++)
-        {
-            Card c = new Card();
-            //c.setValue(insert call to random number generator here)
-            //c.setSuit(Card.SUITS[insert call to random number between 0-3 here])
+
+        Card.Rank[] ranks = Card.Rank.values();
+        Card.Suit[] suits = Card.Suit.values();
+
+        // Fill the magic hand with random cards
+        for (int i = 0; i < magicHand.length; i++) {
+            Card.Rank randomRank = ranks[rand.nextInt(ranks.length)];
+            Card.Suit randomSuit = suits[rand.nextInt(suits.length)];
+
+            magicHand[i] = new Card(randomRank, randomSuit);
         }
-        
-        //insert code to ask the user for Card value and suit, create their card
-        // and search magicHand here
-        //Then report the result here
-        // add one luckcard hard code 2,clubs
+System.out.println("\n--- MAGIC HAND ---");
+for (Card c : magicHand) {
+    System.out.println(c.getRank() + " of " + c.getSuit());
+}
+System.out.println("------------------\n");
+        // Ask user for a rank
+        System.out.println("Enter a rank (ONE-KING or 1-13):");
+        String rankInput = sc.next().toUpperCase();
+
+        // Ask user for a suit
+        System.out.println("Enter a suit (HEARTS, DIAMONDS, CLUBS, SPADES):");
+        String suitInput = sc.next().toUpperCase();
+
+        // Convert input to enums
+        Card.Rank userRank = null;
+        Card.Suit userSuit = null;
+
+        // Convert rank (supports numbers OR words)
+        try {
+            if (rankInput.matches("\\d+")) {
+                int num = Integer.parseInt(rankInput);
+                if (num < 1 || num > 13) {
+                    System.out.println("Invalid number for rank.");
+                    return;
+                }
+                userRank = ranks[num - 1]; // ONE = index 0
+            } else {
+                userRank = Card.Rank.valueOf(rankInput);
+            }
+        } catch (Exception e) {
+            System.out.println("Invalid rank entered.");
+            return;
+        }
+
+        // Convert suit
+        try {
+            userSuit = Card.Suit.valueOf(suitInput);
+        } catch (Exception e) {
+            System.out.println("Invalid suit entered.");
+            return;
+        }
+
+        // Search for the user's card
+        boolean found = false;
+
+        for (Card c : magicHand) {
+            if (c.getRank() == userRank && c.getSuit() == userSuit) {
+                found = true;
+                break;
+            }
+        }
+
+        // Result
+        if (found) {
+            System.out.println("Your card is in the magic hand! You win!");
+        } else {
+            System.out.println("Your card is NOT in the magic hand. You lose!");
+        }
     }
-    
 }
