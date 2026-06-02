@@ -1,4 +1,4 @@
-package Card;
+package card;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,6 +21,7 @@ public class CardTrick {
         Scanner sc = new Scanner(System.in);
 
         // Create an array of 7 random cards
+  
         Card[] magicHand = new Card[7];
 
         Card.Rank[] ranks = Card.Rank.values();
