@@ -10,7 +10,8 @@ import java.util.Random;
 /**
  * Modifier: Om Chauhan
  * Student Number: 991835995
- */
+hello
+*/
 
 public class CardTrick {
 
